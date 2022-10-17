@@ -1,4 +1,5 @@
 import functools
+import os
 from collections import Iterable
 
 import numpy as np
@@ -8,14 +9,14 @@ import streamlit as st
 
 @st.cache(persist=True)
 def load_data():
-    da = DocumentArray.pull('amazon-berkeley-objects-dataset-encoded', show_progress=True)
+    da = DocumentArray.pull(os.getenv('DATASET_NAME', 'amazon-berkeley-objects-dataset-encoded'), show_progress=True)
     colors = [None] + list({doc.tags['color'] for doc in da})
     categories = [None] + list({doc.tags['product_type'] for doc in da})
     countries = [None] + list({doc.tags['country'] for doc in da})
     max_width = max({int(doc.tags['width']) for doc in da})
     max_height = max({int(doc.tags['height']) for doc in da})
     redis_da = DocumentArray(storage='redis', config={
-        # uncomment if you're using redis cloud
+        # uncomment if you're using Redis cloud
         # 'host': 'host',
         # 'port': 'port',
         # 'redis_config': {
