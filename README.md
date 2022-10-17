@@ -27,3 +27,6 @@ PS: if you have used a cloud instance, make sure to update the Redis credentials
 2. Install dependencies: `pip install -r requirements.txt`
 3. Login to Jina Cloud: `jina auth login`
 4. Run the streamlit application: `streamlit run main.py`
+
+## Demo
+![](recommendation-demo.gif)
