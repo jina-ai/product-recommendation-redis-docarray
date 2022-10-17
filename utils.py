@@ -1,6 +1,5 @@
 import functools
 import os
-from collections import Iterable
 
 import numpy as np
 from docarray import DocumentArray, Document
@@ -84,6 +83,8 @@ def view(product_id: str, da: DocumentArray):
     info_column.write(f'Name: {doc.tags["item_name"]}')
     info_column.write(f'Category: {doc.tags["product_type"]}')
     info_column.write(f'Brand: {doc.tags["brand"]}')
+    info_column.write(f'Width: {doc.tags["width"]}')
+    info_column.write(f'Height: {doc.tags["height"]}')
 
     del st.session_state['product']
 

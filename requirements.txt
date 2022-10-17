@@ -1,3 +1,4 @@
 streamlit
 docarray[redis]
+jina
 clip-client

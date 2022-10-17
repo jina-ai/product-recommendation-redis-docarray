@@ -1,4 +1,5 @@
 import streamlit as st
+from jina.logging.profile import TimeContext
 
 from utils import load_data, view_products, recommend, view
 
@@ -27,9 +28,10 @@ with st.sidebar:
     min_width, max_width = st.slider("Product width", min_value=0, max_value=max_width, value=(0, max_width))
     min_height, max_height = st.slider("Product height", min_value=0, max_value=max_height, value=(0, max_height))
 
-products = recommend(st.session_state.get('view_history', []), redis_da, color=color, category=category,
-                        country=country, min_width=min_width, max_width=max_width, min_height=min_height,
-                        max_height=max_height)
+with TimeContext('Retrieving products'):
+    products = recommend(st.session_state.get('view_history', []), redis_da, color=color, category=category,
+                         country=country, min_width=min_width, max_width=max_width, min_height=min_height,
+                         max_height=max_height, k=st.session_state.get('k', 10))
 
 if st.session_state.get('product'):
     view(st.session_state.get('product'), redis_da)
