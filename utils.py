@@ -37,33 +37,21 @@ def load_data():
 
 def recommend(view_history, da: DocumentArray, k: int = 10, color=None, category=None, country=None, min_width=None, max_width=None,
               min_height=None, max_height=None):
-    user_filter = {}
+    user_filter = ''
     if color:
-        user_filter['color'] = {'$eq': color}
+        user_filter += f'@color:{color} '
 
     if country:
-        user_filter['country'] = {'$eq': country}
+        user_filter += f'@country:{country} '
 
     if category:
-        user_filter['product_type'] = {'$eq': category}
+        user_filter += f'@category:{category} '
 
-    width_filter = {}
-    if max_width:
-        width_filter['$lte'] = max_width
-    if min_width:
-        width_filter['$gte'] = min_width
+    if max_width or min_width:
+        user_filter += f'@width:[{min_width or "-inf"} {max_width or "inf"}] '
 
-    if width_filter:
-        user_filter['width'] = width_filter
-
-    height_filter = {}
-    if max_height:
-        height_filter['$lte'] = max_height
-    if min_height:
-        height_filter['$gte'] = min_height
-
-    if height_filter:
-        user_filter['height'] = height_filter
+    if max_height or min_height:
+        user_filter += f'@height:[{min_height or "-inf"} {max_height or "inf"}] '
 
     if view_history:
         embedding = np.average(
