@@ -45,7 +45,7 @@ def recommend(view_history, da: DocumentArray, k: int = 10, color=None, category
         user_filter += f'@country:{country} '
 
     if category:
-        user_filter += f'@category:{category} '
+        user_filter += f'@product_type:{category} '
 
     if max_width or min_width:
         user_filter += f'@width:[{min_width or "-inf"} {max_width or "inf"}] '
@@ -70,6 +70,7 @@ def view(product_id: str, da: DocumentArray):
     image_column.image(doc.uri)
     info_column.write(f'Name: {doc.tags["item_name"]}')
     info_column.write(f'Category: {doc.tags["product_type"]}')
+    info_column.write(f'Country: {doc.tags["country"]}')
     info_column.write(f'Brand: {doc.tags["brand"]}')
     info_column.write(f'Width: {doc.tags["width"]}')
     info_column.write(f'Height: {doc.tags["height"]}')
