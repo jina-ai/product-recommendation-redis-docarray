@@ -1,4 +1,4 @@
 streamlit
-docarray[redis]
+docarray[redis]>=0.18.0
 jina
 clip-client
