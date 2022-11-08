@@ -24,8 +24,11 @@ In order to run the application, make sure to follow these steps:
 Alternatively, you can create an instance for free on [Redis Cloud](https://redis.com/try-free/).
 
 PS: if you have used a cloud instance, make sure to update the Redis credentials (host, port and password) in `utils.py`.
+
 2. Install dependencies: `pip install -r requirements.txt`
+
 3. Login to Jina Cloud: `jina auth login`
+
 4. Run the streamlit application: `streamlit run main.py`
 
 ## Demo
